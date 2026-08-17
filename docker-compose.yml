@@ -29,8 +29,8 @@ services:
       - ./Databases_jesus_ariel:/liquibase/changelog:ro
     working_dir: /liquibase/changelog
     # Use absolute paths to avoid relative path issues when Portainer clones the repo
-    # Also use the newer --defaultsFile option accepted by the Liquibase CLI
-    command: --defaultsFile=/liquibase/changelog/liquibase.properties --changeLogFile=/liquibase/changelog/changelog-master.yaml update
+    # Run Liquibase with explicit connection arguments so the container doesn't depend on an external file mount
+    command: --url=jdbc:postgresql://postgres:5432/biblioteca --username=biblioteca_user --password=biblioteca_pass --changeLogFile=/liquibase/changelog/changelog-master.yaml update
     networks:
       - biblioteca_net
 
