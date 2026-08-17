@@ -462,7 +462,7 @@ http://192.168.0.17:3000
 
 - Captura 13: imagen Docker construida.
 
-![](/mv_img/31.PNG)
+a![](/mv_img/32.PNG)
 
 - Captura 14: frontend funcionando dentro del contenedor.
 
@@ -502,6 +502,9 @@ http://192.168.0.17:8080/swagger-ui/index.html
 **Evidencias:**
 
 - Captura 15: Dockerfile del backend.
+
+![](/mv_img/31.PNG)
+
 - Captura 16: imagen del backend.
 - Captura 17: backend funcionando.
 

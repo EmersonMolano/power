@@ -26,9 +26,11 @@ services:
       postgres:
         condition: service_healthy
     volumes:
-      - ./Databases_jesus_ariel:/liquibase/changelog
+      - ./Databases_jesus_ariel:/liquibase/changelog:ro
     working_dir: /liquibase/changelog
-    command: --defaults-file=liquibase.properties update
+    # Use absolute paths to avoid relative path issues when Portainer clones the repo
+    # Also use the newer --defaultsFile option accepted by the Liquibase CLI
+    command: --defaultsFile=/liquibase/changelog/liquibase.properties --changeLogFile=/liquibase/changelog/changelog-master.yaml update
     networks:
       - biblioteca_net
 
