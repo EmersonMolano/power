@@ -26,7 +26,7 @@ services:
       postgres:
         condition: service_healthy
     volumes:
-      - ./Databases_jesus_ariel:/liquibase/changelog:ro
+      - /home/ubuntu/power/Databases_jesus_ariel:/liquibase/changelog:ro
     working_dir: /liquibase/changelog
     # Use absolute paths to avoid relative path issues when Portainer clones the repo
     # Run Liquibase with explicit connection arguments so the container doesn't depend on an external file mount
