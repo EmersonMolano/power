@@ -1,0 +1,49 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-usuarios
+      author: biblioteca
+      logicalFilePath: changes/001-create-tables.sql
+      labels: "ddl,base,usuarios"
+      comment: Creates the usuarios table.
+      changes:
+        - sqlFile:
+            path: 001_create_usuarios.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/001_create_usuarios.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+  - changeSet:
+      id: 002-create-libros
+      author: biblioteca
+      logicalFilePath: changes/001-create-tables.sql
+      labels: "ddl,base,libros"
+      comment: Creates the libros table.
+      changes:
+        - sqlFile:
+            path: 002_create_libros.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/002_create_libros.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+  - changeSet:
+      id: 003-create-prestamos
+      author: biblioteca
+      logicalFilePath: changes/001-create-tables.sql
+      labels: "ddl,base,prestamos"
+      comment: Creates the prestamos table and its foreign keys.
+      changes:
+        - sqlFile:
+            path: 003_create_prestamos.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/03_tables/003_create_prestamos.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false

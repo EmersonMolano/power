@@ -1,0 +1,6 @@
+changeLogFile=changelog-master.yaml
+url=jdbc:postgresql://10.0.2.15:25433/biblioteca
+username=biblioteca_user
+password=biblioteca_pass
+driver=org.postgresql.Driver
+logLevel=INFO

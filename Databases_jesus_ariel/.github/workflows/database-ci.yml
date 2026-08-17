@@ -1,0 +1,35 @@
+﻿name: Database CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  database:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: biblioteca
+          POSTGRES_USER: biblioteca_user
+          POSTGRES_PASSWORD: biblioteca_pass
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U biblioteca_user -d biblioteca"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Liquibase changelog
+        run: |
+          docker run --rm --network host -v "${{ github.workspace }}:/liquibase/changelog" -w /liquibase/changelog liquibase/liquibase:4.29 --url=jdbc:postgresql://10.0.2.15:5432/biblioteca --username=biblioteca_user --password=biblioteca_pass --changelog-file=changelog-master.yaml validate
+      - name: Run Liquibase migrations
+        run: |
+          docker run --rm --network host -v "${{ github.workspace }}:/liquibase/changelog" -w /liquibase/changelog liquibase/liquibase:4.29 --url=jdbc:postgresql://10.0.2.15:5432/biblioteca --username=biblioteca_user --password=biblioteca_pass --changelog-file=changelog-master.yaml update
+      - name: Check tables
+        run: |
+          docker run --rm --network host -e PGPASSWORD=biblioteca_pass postgres:16-alpine psql -h 10.0.2.15 -U biblioteca_user -d biblioteca -c "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' ORDER BY table_name;"

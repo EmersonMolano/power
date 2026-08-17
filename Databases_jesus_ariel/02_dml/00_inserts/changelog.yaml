@@ -1,0 +1,49 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005-insert-usuarios
+      author: biblioteca
+      logicalFilePath: changes/002-insert-data.sql
+      labels: "dml,seed,usuarios"
+      comment: Inserts initial usuarios records.
+      changes:
+        - sqlFile:
+            path: 001_insert_usuarios.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/02_dml/00_inserts/001_insert_usuarios.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+  - changeSet:
+      id: 006-insert-libros
+      author: biblioteca
+      logicalFilePath: changes/002-insert-data.sql
+      labels: "dml,seed,libros"
+      comment: Inserts initial libros records.
+      changes:
+        - sqlFile:
+            path: 002_insert_libros.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/02_dml/00_inserts/002_insert_libros.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
+  - changeSet:
+      id: 007-insert-prestamos
+      author: biblioteca
+      logicalFilePath: changes/002-insert-data.sql
+      labels: "dml,seed,prestamos"
+      comment: Inserts initial prestamos records.
+      changes:
+        - sqlFile:
+            path: 003_insert_prestamos.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/02_dml/00_inserts/003_insert_prestamos.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false

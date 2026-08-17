@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-create-indexes
+      author: biblioteca
+      logicalFilePath: changes/001-create-tables.sql
+      labels: "ddl,base,indexes"
+      comment: Creates indexes for query performance and foreign keys.
+      changes:
+        - sqlFile:
+            path: 001_create_indexes.sql
+            relativeToChangelogFile: true
+            stripComments: false
+      rollback:
+        - sqlFile:
+            path: ../../05_rollbacks/01_ddl/09_indexes/001_create_indexes.rollback.sql
+            relativeToChangelogFile: true
+            stripComments: false
