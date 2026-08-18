@@ -1,4 +1,4 @@
-version: '3.8'
+﻿version: '3.8'
 services:
   postgres:
     image: postgres:16-alpine
@@ -30,7 +30,7 @@ services:
     working_dir: /liquibase/changelog
     # Use absolute paths to avoid relative path issues when Portainer clones the repo
     # Run Liquibase with explicit connection arguments so the container doesn't depend on an external file mount
-    command: --url=jdbc:postgresql://postgres:5432/biblioteca --username=biblioteca_user --password=biblioteca_pass --changeLogFile=/liquibase/changelog/changelog-master.yaml update
+    command: --defaults-file=liquibase.properties update
     networks:
       - biblioteca_net
 
@@ -39,10 +39,8 @@ services:
       context: ./backend_jesus_ariel
     container_name: backend
     depends_on:
-      postgres:
-        condition: service_healthy
-      liquibase:
-        condition: service_completed_successfully
+      - postgres
+      - liquibase
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/biblioteca
       SPRING_DATASOURCE_USERNAME: biblioteca_user
@@ -69,3 +67,4 @@ networks:
 
 volumes:
   postgres_data:
+
