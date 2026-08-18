@@ -445,7 +445,7 @@ Construccion:
 
 ```bash
 cd Front-end_jesus_ariel
-docker compose up --build
+sudo docker compose up --build
 ```
 
 Acceso:
@@ -492,7 +492,7 @@ Construccion:
 
 ```bash
 cd backend_jesus_ariel
-docker compose up --build
+sudo docker compose up --build
 ```
 
 Acceso:
@@ -532,7 +532,7 @@ Comando:
 
 ```bash
 cd Databases_jesus_ariel
-docker compose up --build
+sudo docker compose up --build
 ```
 
 Puerto publicado:
@@ -548,7 +548,11 @@ Puerto publicado:
 ![](/mv_img/36.PNG)
 
 - Captura 19: base de datos creada.
-- Captura 20: volumen asociado a la base de datos.
+![](/mv_img/37.PNG)
+
+- Captura 20: vo
+
+![](/mv_img/38.PNG)lumen asociado a la base de datos.
 
 ## 15. Actividad 11 - Comunicacion backend-base de datos
 
@@ -599,9 +603,20 @@ curl -X POST http://192.168.0.17:8080/api/usuarios \
 **Evidencias:**
 
 - Captura 21: configuracion de conexion.
+
+![](/mv_img/39.PNG)
+
 - Captura 22: operacion de lectura.
+
+![](/mv_img/40.PNG)
+
 - Captura 23: operacion de escritura.
+
+![](/mv_img/41.PNG)
+
 - Captura 24: logs mostrando comunicacion exitosa.
+
+![](/mv_img/42.PNG)
 
 ## 16. Actividad 12 - Comunicacion frontend-backend
 
@@ -625,8 +640,19 @@ La interfaz permite consultar, registrar, actualizar y eliminar informacion de u
 **Evidencias:**
 
 - Captura 25: frontend funcionando.
+
+![](/mv_img/43.PNG)
+
+![](/mv_img/44.PNG)
+
 - Captura 26: solicitud del frontend hacia el backend.
+
+![](/mv_img/45.PNG)
+
 - Captura 27: respuesta recibida desde el backend.
+
+![](/mv_img/46.PNG)
+![](/mv_img/47.PNG)
 
 ## 17. Actividad 13 - Integracion de la aplicacion
 
@@ -664,6 +690,8 @@ Servicios esperados en la maquina virtual:
 **Evidencia:**
 
 - Captura 28: aplicacion completa funcionando.
+
+![](/mv_img/48.PNG)
 
 ## 18. Actividad 14 - Docker Compose
 
@@ -710,7 +738,7 @@ services:
       postgres:
         condition: service_healthy
     volumes:
-      - ./Databases_jesus_ariel:/liquibase/changelog
+      - ./Databases_jesus_ariel:/liquibase/changelog:ro
     working_dir: /liquibase/changelog
     command: --defaults-file=liquibase.properties update
     networks:
@@ -721,10 +749,8 @@ services:
       context: ./backend_jesus_ariel
     container_name: backend
     depends_on:
-      postgres:
-        condition: service_healthy
-      liquibase:
-        condition: service_completed_successfully
+      - postgres
+      - liquibase
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/biblioteca
       SPRING_DATASOURCE_USERNAME: biblioteca_user
@@ -757,8 +783,8 @@ Comandos:
 
 ```bash
 cd power
-docker compose up -d --build
-docker compose ps
+sudo docker compose up -d --build
+sudo docker compose ps
 ```
 
 Tambien se puede desplegar desde Portainer:
@@ -782,7 +808,7 @@ No se debe ejecutar solamente:
 
 ```bash
 cd Front-end_jesus_ariel
-docker compose up --build
+sudo docker compose up --build
 ```
 
 Ese comando solo prende el frontend. Para que funcione la aplicacion completa en la maquina virtual, se debe usar el `docker-compose.yml` principal ubicado en la raiz `power`.
@@ -790,22 +816,29 @@ Ese comando solo prende el frontend. Para que funcione la aplicacion completa en
 **Evidencias:**
 
 - Captura 29: archivo Docker Compose.
+
+![](/mv_img/49.PNG)
+
 - Captura 30: todos los servicios funcionando.
+
+Como se pueden ver todos los servicios se estan ejecutando menos el liquibase pero esto ya que este se ejecuta y se apaga una vez haya terminado con los datos correspondientes, por eso el code 0.
+
+![](/mv_img/50.PNG)
 
 ## 19. Actividad 15 - Prueba de recuperacion
 
 Detener:
 
 ```bash
-docker compose stop
-docker compose ps
+sudo docker compose stop
+sudo docker compose ps
 ```
 
 Iniciar:
 
 ```bash
-docker compose start
-docker compose ps
+sudo docker compose start
+sudo docker compose ps
 ```
 
 Recrear:
@@ -824,8 +857,17 @@ docker compose up -d --build
 **Evidencias:**
 
 - Captura 31: servicios detenidos.
+
+![](/mv_img/51.PNG)
+![](/mv_img/52.PNG)
+
 - Captura 32: servicios recuperados.
+
+![](/mv_img/53.PNG)
+
 - Captura 33: servicios reconstruidos.
+
+![](/mv_img/54.PNG)
 
 ## 20. Actividad 16 - Comprobacion desde la intranet
 
@@ -844,7 +886,15 @@ http://IP_MAQUINA_VIRTUAL:3000
 **Evidencias:**
 
 - Captura 34: aplicacion funcionando desde el equipo anfitrion.
+
+Como con el comando "ip addr" no se alcansa a ver la ip utilice "hostname -I" siendo la primera ip la nuestra que es "192.168.0.17".
+
+![](/mv_img/55.PNG)
+
 - Captura 35: aplicacion funcionando desde otro equipo de la intranet.
+
+Como se puede ver la ip si corresponde a la de la maquina virtual.
+![](/mv_img/56.PNG)
 
 ## 21. Actividad 17 - Documentacion de la solucion
 

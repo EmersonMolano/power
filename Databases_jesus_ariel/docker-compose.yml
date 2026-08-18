@@ -4,7 +4,7 @@ services:
     container_name: postgres
     environment:
       POSTGRES_DB: biblioteca
-      POSTGRES_USER: postgres
+      POSTGRES_USER: biblioteca_user
       POSTGRES_PASSWORD: biblioteca_pass
     ports:
       - "25433:5432"
