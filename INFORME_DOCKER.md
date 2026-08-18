@@ -466,6 +466,9 @@ a![](/mv_img/32.PNG)
 
 - Captura 14: frontend funcionando dentro del contenedor.
 
+![](/mv_img/33.PNG)
+
+
 ## 13. Actividad 9 - Dockerfile del backend
 
 Archivo: `backend_jesus_ariel/Dockerfile`
@@ -506,7 +509,12 @@ http://192.168.0.17:8080/swagger-ui/index.html
 ![](/mv_img/31.PNG)
 
 - Captura 16: imagen del backend.
+
+![](/mv_img/34.PNG)
+
 - Captura 17: backend funcionando.
+
+![](/mv_img/35.PNG)
 
 ## 14. Actividad 10 - Despliegue de la base de datos
 
@@ -536,6 +544,9 @@ Puerto publicado:
 **Evidencias:**
 
 - Captura 18: contenedor de base de datos funcionando.
+
+![](/mv_img/36.PNG)
+
 - Captura 19: base de datos creada.
 - Captura 20: volumen asociado a la base de datos.
 
